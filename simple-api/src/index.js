@@ -49,12 +49,13 @@ app.get('/image', (req, res) => {
 
 // update endpoint, change your variables if this function is called
 app.get('/update', async (req, res) => {
-	const data = {
-		status: 'updated'
-	}
-	load_quote()
+
 	// do something here with the data you have
-	color = randomColor()
+	mars ()
+
+	const data = {
+		text
+	}
 	return res.send(data);
 });
 
@@ -74,6 +75,13 @@ async function load_quote () {
 	const response = await fetch('https://api.quotable.io/random')
 	const data = await response.json();
 	text = data.content
+}
+
+async function mars () {
+	const response = await fetch('https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=DEMO_KEY')
+	const data = await response.json();
+	text = data.photos
+
 }
 
 // example of a post request

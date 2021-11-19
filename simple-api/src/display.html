@@ -1,0 +1,52 @@
+<html>
+
+<style>
+
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+  }
+
+  img {
+    height: 100vh;
+  }
+
+</style>
+
+
+<script>
+
+var index = 0;
+var data;
+var imgElement;
+
+document.addEventListener('DOMContentLoaded', function() {
+  
+  imgElement = document.getElementById('av');
+
+  next();
+
+});
+
+var next = async () => {
+    index += 1;
+
+    const response = await fetch('https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=DEMO_KEY');
+    const data = await response.json();
+	imgElement.src = data.photos[index].img_src;
+}
+
+</script>
+
+<body>
+
+  <img src="" onclick="next()" id="av"/>
+
+</body>
+</html>
